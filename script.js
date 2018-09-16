@@ -1,5 +1,5 @@
+// Array full of values to type
 var lines = new Array();
-// html and css
 lines = [
   "html",
   "head",
@@ -12,6 +12,11 @@ lines = [
   "h4",
   "h5",
   "h6",
+  "span",
+  "script",
+  "meta",
+  "link",
+  "doctype",
   "javascript",
   "function()",
   "var",
@@ -40,20 +45,32 @@ lines = [
   "class"
 ];
 
+// When page loads, start the game
 window.addEventListener("load", initialize());
 
+// var playerInfo = {
+//   name: "",
+//   score: 0
+// };
+
+// playerInfo.name = prompt("Enter player name");
+
+// Values are the seconds you can have during the game
 const difficulties = {
   easy: 5,
   medium: 4,
   hard: 3
 };
 
+// Difficulty, sets timer
 const currentDifficulty = difficulties.hard;
 
+// Variables
 let time = currentDifficulty;
 let score = 0;
 let playing;
 
+// Displays a random item from the array to type
 function displayLine(lines) {
   const currentLine = document.querySelector("#current-line");
   const seconds = document.querySelector("#seconds");
@@ -62,6 +79,7 @@ function displayLine(lines) {
   console.log(randomLine);
 }
 
+// Runs when page loads. Shows first line.
 function initialize() {
   displayLine(lines);
   input.addEventListener("input", start);
@@ -69,6 +87,7 @@ function initialize() {
   setInterval(isPlaying, 50);
 }
 
+// If input matches the line, reset timer, show new line, and increase score.
 function start() {
   const input = document.querySelector("#input");
   if (match()) {
@@ -86,6 +105,7 @@ function start() {
   }
 }
 
+// Checks if input matches the line given
 function match() {
   const currentLine = document.querySelector("#current-line");
   if (input.value === currentLine.innerHTML) {
@@ -97,6 +117,7 @@ function match() {
   }
 }
 
+// Checks if time is greater than 0 or equal to 0. If time is greater, decrease time, else stop the game.
 function countdown() {
   const timer = document.querySelector("#time");
   if (time > 0) {
@@ -107,10 +128,19 @@ function countdown() {
   timer.innerHTML = time;
 }
 
+// If time is 0, stop the game and reset the score.
 function isPlaying() {
   const condition = document.querySelector("#condition");
   if (!playing && time === 0) {
     condition.innerHTML = "Game Over";
     score = -1;
   }
+}
+
+// Appends the score to the leaderboard
+function addScore() {
+  const boards = document.querySelector(".infos");
+  boards.innerHTML += '<div class="rows"></div>';
+  const rows = document.querySelector(".rows");
+  rows.innerHTML += score;
 }

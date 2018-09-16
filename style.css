@@ -5,3 +5,21 @@ header {
 header h1 {
   color: white;
 }
+
+.description {
+  background-color: rgb(103, 177, 241);
+}
+
+.bottom {
+  color: white;
+}
+
+.leaderboard {
+  border: none;
+}
+
+.rows {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
