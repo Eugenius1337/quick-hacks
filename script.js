@@ -9,10 +9,25 @@ lines = [
   "h1",
   "h2",
   "h3",
-  "h4",
-  "h5",
-  "h6",
   "span",
+  "background-color",
+  "font-weight",
+  "text-align",
+  "border",
+  "padding",
+  "margin",
+  "position",
+  "display",
+  "font-size",
+  "flex",
+  "flex-direction",
+  "line-height",
+  "z-index",
+  "align-items",
+  "text-transform",
+  "text-decoration",
+  "font-family",
+  "justify-content",
   "script",
   "meta",
   "link",
@@ -48,13 +63,6 @@ lines = [
 // When page loads, start the game
 window.addEventListener("load", initialize());
 
-// var playerInfo = {
-//   name: "",
-//   score: 0
-// };
-
-// playerInfo.name = prompt("Enter player name");
-
 // Values are the seconds you can have during the game
 const difficulties = {
   easy: 5,
@@ -73,7 +81,6 @@ let playing;
 // Displays a random item from the array to type
 function displayLine(lines) {
   const currentLine = document.querySelector("#current-line");
-  const seconds = document.querySelector("#seconds");
   const randomLine = Math.floor(Math.random() * lines.length);
   currentLine.innerHTML = lines[randomLine];
   console.log(randomLine);
@@ -109,10 +116,11 @@ function start() {
 function match() {
   const currentLine = document.querySelector("#current-line");
   if (input.value === currentLine.innerHTML) {
+    condition.classList.remove("invisible");
     condition.innerHTML = "Correct";
     return true;
   } else {
-    condition.innerHTML = "";
+    condition.classList.add("invisible");
     return false;
   }
 }
@@ -132,15 +140,8 @@ function countdown() {
 function isPlaying() {
   const condition = document.querySelector("#condition");
   if (!playing && time === 0) {
+    condition.classList.remove("invisible");
     condition.innerHTML = "Game Over";
     score = -1;
   }
-}
-
-// Appends the score to the leaderboard
-function addScore() {
-  const boards = document.querySelector(".infos");
-  boards.innerHTML += '<div class="rows"></div>';
-  const rows = document.querySelector(".rows");
-  rows.innerHTML += score;
 }
